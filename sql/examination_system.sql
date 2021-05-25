@@ -32,8 +32,7 @@ INSERT INTO `college` VALUES ('1', '计算机系');
 INSERT INTO `college` VALUES ('2', '设计系');
 INSERT INTO `college` VALUES ('3', '财经系');
 
--- ----------------------------
--- Table structure for course
+-- ---------------------se
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
