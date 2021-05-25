@@ -59,17 +59,36 @@ public class StudentController {
         Subject subject = SecurityUtils.getSubject();
         String username = (String) subject.getPrincipal();
 
-        SelectedCourseCustom selectedCourseCustom = new SelectedCourseCustom();
-        selectedCourseCustom.setCourseid(id);
-        selectedCourseCustom.setStudentid(Integer.parseInt(username));
+        //学生id是否存在
+        if(studentService.findById(Integer.parseInt(username))!=null){
+            //课程id是否存在
+            if(courseService.findById(id)!=null) {
+                SelectedCourseCustom selectedCourseCustom = new SelectedCourseCustom();
+                selectedCourseCustom.setCourseid(id);
+                selectedCourseCustom.setStudentid(Integer.parseInt(username));
 
-        SelectedCourseCustom s = selectedCourseService.findOne(selectedCourseCustom);
+                SelectedCourseCustom s = selectedCourseService.findOne(selectedCourseCustom);
 
-        if (s == null) {
-            selectedCourseService.save(selectedCourseCustom);
-        } else {
-            throw new CustomException("该门课程你已经选了，不能再选");
+                //没找到，说明没选过
+                if (s == null) {
+                    selectedCourseService.save(selectedCourseCustom);
+                } else {
+                    if (s.getMark() >= 60) {
+                        throw new CustomException("该门课程你已经选了，不能再选");
+                    } else {
+                        selectedCourseService.save(selectedCourseCustom);
+                    }
+
+                }
+            }else{
+                throw new CustomException("课程不存在");
+            }
+
+        }else{
+            throw new CustomException("用户名不存在");
         }
+
+
 
         return "redirect:/student/selectedCourse";
     }
