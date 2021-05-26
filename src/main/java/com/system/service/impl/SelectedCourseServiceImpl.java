@@ -56,9 +56,6 @@ public class SelectedCourseServiceImpl implements SelectedCourseService {
         return secList;
     }
 
-    public List<SelectedCourseCustom> findByCourseIDPaging(Integer page, Integer id) throws Exception {
-        return null;
-    }
 
     //获取该课程学生数
     public Integer countByCourseID(Integer id) throws Exception {

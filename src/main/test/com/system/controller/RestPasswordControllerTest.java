@@ -92,8 +92,7 @@ public class RestPasswordControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/passwordRest")
                 .param("oldPassword", OldPassword)
-                .param("password1", NewPassword)
-                .content("Json"))
+                .param("password1", NewPassword))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(redirectedUrl("/logout"))
                 .andReturn();

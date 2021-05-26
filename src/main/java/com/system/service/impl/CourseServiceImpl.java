@@ -31,7 +31,7 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private SelectedcourseMapper selectedcourseMapper;
 
-    public void upadteById(Integer id, CourseCustom courseCustom) throws Exception {
+    public void updateById(Integer id, CourseCustom courseCustom) throws Exception {
         courseMapper.updateByPrimaryKey(courseCustom);
     }
 
@@ -67,7 +67,7 @@ public class CourseServiceImpl implements CourseService {
         return false;
     }
 
-    public int getCountCouse() throws Exception {
+    public int getCountCourse() throws Exception {
         //自定义查询对象
         CourseExample courseExample = new CourseExample();
         //通过criteria构造查询条件

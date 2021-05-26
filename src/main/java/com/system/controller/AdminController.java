@@ -3,8 +3,6 @@ package com.system.controller;
 import com.system.exception.CustomException;
 import com.system.po.*;
 import com.system.service.*;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +67,7 @@ public class AdminController {
     @RequestMapping(value = "/addStudent", method = {RequestMethod.GET})
     public String addStudentUI(Model model) throws Exception {
 
-        List<College> list = collegeService.finAll();
+        List<College> list = collegeService.findAll();
 
         model.addAttribute("collegeList", list);
 
@@ -108,7 +106,7 @@ public class AdminController {
         if (studentCustom == null) {
             throw new CustomException("未找到该名学生");
         }
-        List<College> list = collegeService.finAll();
+        List<College> list = collegeService.findAll();
 
         model.addAttribute("collegeList", list);
         model.addAttribute("student", studentCustom);
@@ -128,7 +126,7 @@ public class AdminController {
     }
 
     // 删除学生
-    @RequestMapping(value = "/removeStudent", method = {RequestMethod.GET} )
+    @RequestMapping(value = "/removeStudent", method = {RequestMethod.POST} )
     private String removeStudent(Integer id) throws Exception {
         if (id == null) {
             //加入没有带学生id就进来的话就返回学生显示页面
@@ -180,7 +178,7 @@ public class AdminController {
     @RequestMapping(value = "/addTeacher", method = {RequestMethod.GET})
     public String addTeacherUI(Model model) throws Exception {
 
-        List<College> list = collegeService.finAll();
+        List<College> list = collegeService.findAll();
 
         model.addAttribute("collegeList", list);
 
@@ -218,7 +216,7 @@ public class AdminController {
         if (teacherCustom == null) {
             throw new CustomException("未找到该名学生");
         }
-        List<College> list = collegeService.finAll();
+        List<College> list = collegeService.findAll();
 
         model.addAttribute("collegeList", list);
         model.addAttribute("teacher", teacherCustom);
@@ -270,7 +268,7 @@ public class AdminController {
         //页码对象
         PagingVO pagingVO = new PagingVO();
         //设置总页数
-        pagingVO.setTotalCount(courseService.getCountCouse());
+        pagingVO.setTotalCount(courseService.getCountCourse());
         if (page == null || page == 0) {
             pagingVO.setToPageNo(1);
             list = courseService.findByPaging(1);
@@ -291,7 +289,7 @@ public class AdminController {
     public String addCourseUI(Model model) throws Exception {
 
         List<TeacherCustom> list = teacherService.findAll();
-        List<College> collegeList = collegeService.finAll();
+        List<College> collegeList = collegeService.findAll();
 
         model.addAttribute("collegeList", collegeList);
         model.addAttribute("teacherList", list);
@@ -326,7 +324,7 @@ public class AdminController {
             throw new CustomException("未找到该课程");
         }
         List<TeacherCustom> list = teacherService.findAll();
-        List<College> collegeList = collegeService.finAll();
+        List<College> collegeList = collegeService.findAll();
 
         model.addAttribute("teacherList", list);
         model.addAttribute("collegeList", collegeList);
@@ -340,7 +338,7 @@ public class AdminController {
     @RequestMapping(value = "/editCourse", method = {RequestMethod.POST})
     public String editCourse(CourseCustom courseCustom) throws Exception {
 
-        courseService.upadteById(courseCustom.getCourseid(), courseCustom);
+        courseService.updateById(courseCustom.getCourseid(), courseCustom);
 
         //重定向
         return "redirect:/admin/showCourse";

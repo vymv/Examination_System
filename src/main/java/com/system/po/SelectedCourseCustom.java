@@ -34,7 +34,7 @@ public class SelectedCourseCustom extends Selectedcourse {
         return courseCustom;
     }
 
-    public void setCouseCustom(CourseCustom couseCustom) {
+    public void setCourseCustom(CourseCustom couseCustom) {
         this.courseCustom = couseCustom;
     }
 }

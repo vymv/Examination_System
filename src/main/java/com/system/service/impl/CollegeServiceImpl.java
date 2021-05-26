@@ -18,7 +18,7 @@ public class CollegeServiceImpl implements CollegeService {
     @Autowired
     private CollegeMapper collegeMapper;
 
-    public List<College> finAll() throws Exception {
+    public List<College> findAll() throws Exception {
         CollegeExample collegeExample = new CollegeExample();
         CollegeExample.Criteria criteria = collegeExample.createCriteria();
 

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface CourseService {
     //根据id更新课程信息
-    void upadteById(Integer id, CourseCustom courseCustom) throws Exception;
+    void updateById(Integer id, CourseCustom courseCustom) throws Exception;
 
     //根据id删除课程信息
     Boolean removeById(Integer id) throws Exception;
@@ -21,7 +21,7 @@ public interface CourseService {
     Boolean save(CourseCustom couseCustom) throws Exception;
 
     //获取课程总数
-    int getCountCouse() throws Exception;
+    int getCountCourse() throws Exception;
 
     //根据id查询
     CourseCustom findById(Integer id) throws Exception;

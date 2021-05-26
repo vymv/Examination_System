@@ -97,10 +97,14 @@ CREATE TABLE `selectedcourse` (
 -- ----------------------------
 -- Records of selectedcourse
 -- ----------------------------
-INSERT INTO `selectedcourse` VALUES ('2', '10001', '12');
-INSERT INTO `selectedcourse` VALUES ('1', '10001', '95');
-INSERT INTO `selectedcourse` VALUES ('1', '10002', '66');
+INSERT INTO `selectedcourse` VALUES ('1', '10001', null);
+INSERT INTO `selectedcourse` VALUES ('1', '10002', null);
 INSERT INTO `selectedcourse` VALUES ('1', '10003', null);
+INSERT INTO `selectedcourse` VALUES ('1', '10004', null);
+INSERT INTO `selectedcourse` VALUES ('1', '10005', null);
+INSERT INTO `selectedcourse` VALUES ('1', '10006', null);
+INSERT INTO `selectedcourse` VALUES ('1', '10007', null);
+INSERT INTO `selectedcourse` VALUES ('2', '10001', '12');
 INSERT INTO `selectedcourse` VALUES ('2', '10003', '99');
 INSERT INTO `selectedcourse` VALUES ('5', '10001', null);
 INSERT INTO `selectedcourse` VALUES ('3', '10001', null);
@@ -130,6 +134,7 @@ INSERT INTO `student` VALUES ('10003', '小陈', '女', '1996-09-02', '2015-09-0
 INSERT INTO `student` VALUES ('10004', '小华', '男', '1996-09-02', '2015-09-02', '2');
 INSERT INTO `student` VALUES ('10005', '小左', '女', '1996-09-02', '2015-09-02', '2');
 INSERT INTO `student` VALUES ('10006', '小拉', '女', '1996-09-02', '2015-09-02', '1');
+INSERT INTO `student` VALUES ('10007', '小明', '女', '1996-09-02', '2015-09-02', '1');
 
 -- ----------------------------
 -- Table structure for teacher
@@ -139,7 +144,7 @@ CREATE TABLE `teacher` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(200) NOT NULL,
   `sex` varchar(20) DEFAULT NULL,
-  `birthYear` date NOT NULL,
+  `birthYear` date NULL,
   `degree` varchar(20) DEFAULT NULL COMMENT '学历',
   `title` varchar(255) DEFAULT NULL COMMENT '职称',
   `grade` date DEFAULT NULL COMMENT '入职时间',
@@ -180,6 +185,7 @@ INSERT INTO `userlogin` VALUES ('10', '10003', '123', '2');
 INSERT INTO `userlogin` VALUES ('11', '10005', '123', '2');
 INSERT INTO `userlogin` VALUES ('12', '10004', '123', '2');
 INSERT INTO `userlogin` VALUES ('13', '10006', '123', '2');
+INSERT INTO `userlogin` VALUES ('17', '10007', '123', '2');
 INSERT INTO `userlogin` VALUES ('14', '1001', '123', '1');
 INSERT INTO `userlogin` VALUES ('15', '1002', '123', '1');
 INSERT INTO `userlogin` VALUES ('16', '1003', '123', '1');

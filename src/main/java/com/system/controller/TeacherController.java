@@ -71,8 +71,11 @@ public class TeacherController {
     // 打分
     @RequestMapping(value = "/mark", method = {RequestMethod.POST})
     public String mark(SelectedCourseCustom scc) throws Exception {
-
-        selectedCourseService.updataOne(scc);
+        if(scc.getMark()>=0 && scc.getMark()<=100)
+            selectedCourseService.updataOne(scc);
+        else{
+            throw new CustomException("成绩边界超出范围");
+        }
 
         return "redirect:/teacher/gradeCourse?id="+scc.getCourseid();
     }

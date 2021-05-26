@@ -37,7 +37,7 @@ public class StudentController {
         //页码对象
         PagingVO pagingVO = new PagingVO();
         //设置总页数
-        pagingVO.setTotalCount(courseService.getCountCouse());
+        pagingVO.setTotalCount(courseService.getCountCourse());
         if (page == null || page == 0) {
             pagingVO.setToPageNo(1);
             list = courseService.findByPaging(1);
