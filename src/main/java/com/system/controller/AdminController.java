@@ -5,10 +5,12 @@ import com.system.po.*;
 import com.system.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,6 +42,7 @@ public class AdminController {
 
     //  学生信息显示
     @RequestMapping("/showStudent")
+    @ResponseStatus(HttpStatus.OK)
     public String showStudent(Model model, Integer page) throws Exception {
 
         List<StudentCustom> list = null;

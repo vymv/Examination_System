@@ -26,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.Resource;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/*.xml")
@@ -36,10 +37,6 @@ public class AdminControllerTest {
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
-
-
-
 
     @Resource
     org.apache.shiro.mgt.SecurityManager securityManager;
@@ -89,26 +86,148 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void addStudentUI() {
+    public void addStudent() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/addStudent"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
+    }
+
+
+    @Test
+    public void editStudent() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/editStudent"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
     }
 
     @Test
-    public void addStudent() {
+    public void showTeacher() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/showTeacher"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
     }
 
     @Test
-    public void editStudentUI() {
+    public void addTeacher() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/addTeacher"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
     }
 
     @Test
-    public void editStudent() {
+    public void editTeacher() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/editStudent"))
+                .andExpect(redirectedUrl("/admin/showStudent"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
+    }
+
+
+    @Test
+    public void removeTeacher() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/removeTeacher"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
+    }
+
+
+    @Test
+    public void selectTeacher() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/selectTeacher?findByName="))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
     }
 
     @Test
-    public void showTeacher() {
+    public void showCourse() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/showCourse"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        System.out.println(responseString);
+    }
+
+
+    @Test
+    public void addCourse() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/addCourse"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
     }
 
     @Test
-    public void addTeacherUI() {
+    public void editCourse() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/editCourse"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
     }
+
+
+    @Test
+    public void removeCourse() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/removeCourse"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
+    @Test
+    public void selectCourse() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/selectCourse"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
+    @Test
+    public void userPasswordRest() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/userPasswordRest"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
+    @Test
+    public void passwordRestUI() throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/admin/passwordRest"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+    }
+
 }
