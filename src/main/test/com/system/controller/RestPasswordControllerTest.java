@@ -106,10 +106,9 @@ public class RestPasswordControllerTest {
         String NewPassword = "";
         mockMvc.perform(MockMvcRequestBuilders.post("/passwordRest")
                 .param("oldPassword", OldPassword)
-                .param("password1", NewPassword)
-                .content("Json"))
+                .param("password1", NewPassword))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
+                .andExpect(model().attribute("message","新密码不能为空"))
                 .andReturn();
 
     }

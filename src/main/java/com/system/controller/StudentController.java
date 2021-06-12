@@ -66,9 +66,7 @@ public class StudentController {
                 SelectedCourseCustom selectedCourseCustom = new SelectedCourseCustom();
                 selectedCourseCustom.setCourseid(id);
                 selectedCourseCustom.setStudentid(Integer.parseInt(username));
-
                 SelectedCourseCustom s = selectedCourseService.findOne(selectedCourseCustom);
-
                 //没找到，说明没选过
                 if (s == null) {
                     selectedCourseService.save(selectedCourseCustom);
@@ -78,14 +76,13 @@ public class StudentController {
                     } else {
                         selectedCourseService.save(selectedCourseCustom);
                     }
-
                 }
             }else{
                 throw new CustomException("课程不存在");
             }
 
         }else{
-            throw new CustomException("用户名不存在");
+            throw new CustomException("用户不存在");
         }
 
 

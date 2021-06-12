@@ -79,11 +79,12 @@ public class StudentControllerTest {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
-        login("10001", "123");
+
 
     }
     @Test
     public void stuCourseShow() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.get("/student/showCourse"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
@@ -93,7 +94,8 @@ public class StudentControllerTest {
 
     //选课
     @Test
-    public void stuSelectedCourse() throws Exception {
+    public void stuSelectedCourse1() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.post("/student/stuSelectedCourse")
                 .param("id","6"))
                 .andDo(MockMvcResultHandlers.print())
@@ -101,9 +103,51 @@ public class StudentControllerTest {
                 .andReturn();
     }
 
+    @Test
+    public void stuSelectedCourse2() throws Exception {
+        login("10003", "123");
+        mockMvc.perform(MockMvcRequestBuilders.post("/student/stuSelectedCourse")
+                .param("id","233"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(model().attribute("message","课程不存在"))
+                .andReturn();
+    }
+
+    @Test
+    public void stuSelectedCourse3() throws Exception {
+        login("10003", "123");
+        mockMvc.perform(MockMvcRequestBuilders.post("/student/stuSelectedCourse")
+                .param("id","2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(model().attribute("message","该门课程你已经选了，不能再选"))
+                .andReturn();
+    }
+
+    @Test
+    public void stuSelectedCourse4() throws Exception {
+        login("10001", "123");
+        mockMvc.perform(MockMvcRequestBuilders.post("/student/stuSelectedCourse")
+                .param("id","2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(redirectedUrl("/student/selectedCourse"))
+                .andReturn();
+    }
+
+    @Test
+    public void stuSelectedCourse5() throws Exception {
+        login("10003", "123");
+        mockMvc.perform(MockMvcRequestBuilders.post("/student/stuSelectedCourse")
+                .param("id","2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(redirectedUrl("/student/selectedCourse"))
+                .andReturn();
+    }
+
+
     //退课
     @Test
     public void outCourse() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.post("/student/outCourse")
                 .param("id","6"))
                 .andDo(MockMvcResultHandlers.print())
@@ -114,6 +158,7 @@ public class StudentControllerTest {
     //已选课程
     @Test
     public void selectedCourse() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.get("/student/outCourse"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
@@ -123,6 +168,7 @@ public class StudentControllerTest {
     //已修课程
     @Test
     public void overCourse() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.get("/student/overCourse"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
@@ -131,6 +177,7 @@ public class StudentControllerTest {
 
     @Test
     public void passwordRest() throws Exception {
+        login("10001", "123");
         mockMvc.perform(MockMvcRequestBuilders.post("/student/passwordRest"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())

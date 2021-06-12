@@ -8,5 +8,7 @@ public class CustomDateConverterTest {
 
     @Test
     public void convert() {
+        CustomDateConverter customDateConverter = new CustomDateConverter();
+        customDateConverter.convert("2021-12-12");
     }
 }

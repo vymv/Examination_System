@@ -1,5 +1,6 @@
 package com.system.controller;
 
+import com.system.po.Userlogin;
 import com.system.vo.ResetPasswordVo;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
@@ -86,6 +87,16 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void login() {
+    public void login() throws Exception {
+
+        String userid = "admin";
+        String password = "123";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .param("username",userid)
+                .param("password", password))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(redirectedUrl("/admin/showStudent"))
+                .andReturn();
     }
 }

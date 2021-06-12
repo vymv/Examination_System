@@ -1,8 +1,10 @@
 package com.system.service.impl;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
 import com.system.po.Teacher;
 import com.system.po.TeacherCustom;
 import com.system.service.TeacherService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -45,17 +47,21 @@ public class TeacherServiceImplTest {
         teacherCustom.setDegree("硕士");
 
         teacherService.updateById(1003, teacherCustom);
+        Assert.assertEquals(teacherService.findById(1003).getUsername(),"软老师");
+        Assert.assertEquals(teacherService.findById(1003).getTitle(),"助教");
+        Assert.assertEquals(teacherService.findById(1003).getDegree(),"硕士");
     }
 
     @Test
     public void removeById() throws Exception {
         teacherService.removeById(1003);
+        Assert.assertNull(teacherService.findById(1003));
     }
 
     @Test
     public void findByPaging() throws Exception {
         List<TeacherCustom> list = teacherService.findByPaging(1);
-        System.out.println();
+        Assert.assertEquals(list.get(0).getUsername(),"刘老师");
     }
 
     @Test
@@ -76,31 +82,35 @@ public class TeacherServiceImplTest {
         teacherCustom.setTitle("助教");
 
         teacherService.save(teacherCustom);
+        Assert.assertEquals(teacherService.findById(1003).getUsername(),"软老师");
+        Assert.assertEquals(teacherService.findById(1003).getTitle(),"助教");
     }
 
     @Test
     public void getCountTeacher() throws Exception {
         int i = teacherService.getCountTeacher();
-        System.out.println(i);
+        Assert.assertEquals(i,3);
     }
 
     @Test
     public void findById() throws Exception {
 
         TeacherCustom teacherCustom = teacherService.findById(1001);
-        System.out.println();
+        Assert.assertEquals(teacherCustom.getUsername(),"刘老师");
     }
 
     @Test
     public void findByName() throws Exception {
         List<TeacherCustom> list = teacherService.findByName("老师");
-        System.out.println();
+        Assert.assertEquals(list.get(0).getUsername(),"刘老师");
+        Assert.assertEquals(list.size(),3);
     }
 
     @Test
     public void findAll() throws Exception {
         List<TeacherCustom> list = teacherService.findAll();
-        System.out.println();
+        Assert.assertEquals(list.get(0).getUsername(),"刘老师");
+        Assert.assertEquals(list.size(),3);
     }
 
 }

@@ -3,6 +3,7 @@ package com.system.service.impl;
 import com.system.po.Role;
 import com.system.service.RoleService;
 import com.system.service.StudentService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -27,5 +28,6 @@ public class RoleServiceImplTest {
     public void findByid() throws Exception {
         Integer id =Integer.getInteger("1");
         Role r = roleService.findByid(id);
+        Assert.assertEquals(r.getRolename(),"teacher");
     }
 }

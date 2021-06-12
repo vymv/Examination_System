@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
         criteria.andCourseidEqualTo(id);
         List<Selectedcourse> list = selectedcourseMapper.selectByExample(example);
 
-        if (list.size() == 0) {
+        if (list.size() != 0) {
             courseMapper.deleteByPrimaryKey(id);
             return true;
         }

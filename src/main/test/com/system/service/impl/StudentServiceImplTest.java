@@ -5,6 +5,7 @@ import com.system.po.Student;
 import com.system.po.StudentCustom;
 import com.system.service.StudentService;
 import com.system.service.TeacherService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,19 +53,22 @@ public class StudentServiceImplTest {
         studentCustom.setSex("男");
         studentCustom.setGrade(new Date());
         studentService.updataById(10004, studentCustom);
+        Assert.assertEquals(studentService.findById(10004).getSex(),"男");
     }
 
     @Test
     public void removeById() throws Exception {
 
         studentService.removeById(10004);
+        Assert.assertNotNull(studentService.findById(10004));
     }
 
     @Test
     public void findByPaging() throws Exception {
 
         List<StudentCustom> list =  studentService.findByPaging(1);
-        System.out.println();
+        Assert.assertEquals(list.get(0).getUsername(),"小黄");
+
     }
 
     @Test
@@ -86,33 +90,32 @@ public class StudentServiceImplTest {
 
 
         studentService.save(studentCustom);
+        Assert.assertEquals(studentService.findById(10040).getUsername(),"小花");
     }
 
     @Test
     public void getCountStudent() throws Exception {
 
         int i = studentService.getCountStudent();
-        System.out.println();
+        Assert.assertEquals(i,7);
     }
 
     @Test
     public void findById() throws Exception {
 
-
         Student student = studentService.findById(10001);
-        System.out.println();
+        Assert.assertEquals(student.getUsername(),"小黄");
+        Assert.assertEquals(student.getSex(),"男");
     }
 
     @Test
     public void findByName() throws Exception {
 
         List<StudentCustom> list = studentService.findByName("小");
-        System.out.println();
+        Assert.assertEquals(list.get(0).getUsername(),"小黄");
+
     }
 
-    @Test
-    public void findStudentAndSelectCourseListByName() throws Exception {
-        studentService.findStudentAndSelectCourseListByName("10001");
-    }
+
 
 }

@@ -1,10 +1,14 @@
 package com.system.service.impl;
 
+import com.system.po.College;
 import com.system.service.CollegeService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 public class CollegeServiceImplTest {
 
@@ -20,6 +24,7 @@ public class CollegeServiceImplTest {
 
     @Test
     public void findAll() throws Exception {
-        collegeService.findAll();
+        List<College> collegeList = collegeService.findAll();
+        Assert.assertEquals(collegeList.get(0).getCollegename(),"计算机系");
     }
 }

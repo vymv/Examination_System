@@ -34,16 +34,12 @@ public class StudentServiceImpl implements StudentService {
     public void removeById(Integer id) throws Exception {
         studentMapper.deleteByPrimaryKey(id);
     }
-
     public List<StudentCustom> findByPaging(Integer toPageNo) throws Exception {
         PagingVO pagingVO = new PagingVO();
         pagingVO.setToPageNo(toPageNo);
-
         List<StudentCustom> list = studentMapperCustom.findByPaging(pagingVO);
-
         return list;
     }
-
     public Boolean save(StudentCustom studentCustoms) throws Exception {
         Student stu = studentMapper.selectByPrimaryKey(studentCustoms.getUserid());
         if (stu == null) {
@@ -54,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
         return false;
     }
 
-    //返回学生总数
+
     public int getCountStudent() throws Exception {
         //自定义查询对象
         StudentExample studentExample = new StudentExample();
@@ -62,21 +58,16 @@ public class StudentServiceImpl implements StudentService {
         criteria.andUseridIsNotNull();
         return studentMapper.countByExample(studentExample);
     }
-
     public StudentCustom findById(Integer id) throws Exception {
 
         Student student  = studentMapper.selectByPrimaryKey(id);
         StudentCustom studentCustom = null;
         if (student != null) {
             studentCustom = new StudentCustom();
-            //类拷贝
             BeanUtils.copyProperties(student, studentCustom);
         }
-
         return studentCustom;
     }
-
-    //模糊查询
     public List<StudentCustom> findByName(String name) throws Exception {
 
         StudentExample studentExample = new StudentExample();
